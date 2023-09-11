@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 void main() => runApp(const MainApp());
 
@@ -9,43 +8,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
- // ACA SE CAMBIA EL COLOR
-theme: FlexThemeData.light(
-  scheme: FlexScheme.greenM3,
-  surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-  blendLevel: 7,
-  subThemesData: const FlexSubThemesData(
-    blendOnLevel: 10,
-    blendOnColors: false,
-    useTextTheme: true,
-    useM2StyleDividerInM3: true,
-
-    useInputDecoratorThemeInDialogs: true,
-  ),
-  visualDensity: FlexColorScheme.comfortablePlatformDensity,
-  useMaterial3: true,
-  swapLegacyOnMaterial3: true,
-),
-darkTheme: FlexThemeData.dark(
-  scheme: FlexScheme.greenM3,
-  surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-  blendLevel: 13,
-  subThemesData: const FlexSubThemesData(
-    blendOnLevel: 20,
-    useTextTheme: true,
-    useM2StyleDividerInM3: true,
-
-    useInputDecoratorThemeInDialogs: true,
-  ),
-  visualDensity: FlexColorScheme.comfortablePlatformDensity,
-  useMaterial3: true,
-  swapLegacyOnMaterial3: true,
-),  // ACA SE CAMBIA EL COLOR
-
-
-      home: const HomeApp(),
+    return const MaterialApp(
+      home: HomeApp(),
     );
   }
 }
@@ -65,18 +29,17 @@ class HomeApp extends StatelessWidget {
             }
           },
         ),
-        title: Text(
-          'Actores Chilenos',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: const Text('PARC'),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.account_circle),
+            offset: const Offset(0, 50),
+            onSelected: (String result) {
               if (kDebugMode) {
-                print('Icono de persona presionado!');
+                print('Opción seleccionada: $result');
               }
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[],
           ),
         ],
       ),
@@ -85,114 +48,88 @@ class HomeApp extends StatelessWidget {
           Column(
             children: <Widget>[
               ListTile(
-
-                //AQUI AGRGUE UN USUARIO CON IMAGEN
                 leading: const CircleAvatar(
                   backgroundImage: AssetImage(
-                      'assets/harold_1.jpeg'),
-                ),    //AQUI AGRGUE UN USUARIO CON IMAGEN
-
-
-                title: const Text(
-                  'Harold',
+                      'assets/engelbart.jpg'), // Agrega 'assets/' aquí
                 ),
-                subtitle: const Text('Los héroes del norte'),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    // Agrega la lógica para seguir aquí
-                    if (kDebugMode) {
-                      print('Seguir a Benjamín Vicuña');
-                    }
-                  },
-                  child: const Text('Seguir'),
-                ),
+                title: const Text('Douglas Engelbart'),
+                subtitle: const Text('Inventor del mouse'),
+                trailing:
+                    const Icon(Icons.more_vert), // Agrega un ícono a la derecha
                 onTap: () {
                   if (kDebugMode) {
-                    print('Item seleccionado: Benjamín Vicuña');
-                  }
-                },
-              ),
-              const Divider(),
-              ListTile(
-                leading: const CircleAvatar(
-                  child: Text(
-                    'D',
-                  ),
-                ),
-                title: const Text(
-                  'Daniela Vega',
-                ),
-                subtitle: const Text('Los héroes del norte'),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    // Agrega la lógica para seguir aquí
-                    if (kDebugMode) {
-                      print('Seguir a Daniela Vega');
-                    }
-                  },
-                  child: const Text('Seguir'),
-                ),
-                onTap: () {
-                  if (kDebugMode) {
-                    print('Item seleccionado: Daniela Vega');
-                  }
-                },
-              ),
-              const Divider(),
-              ListTile(
-                leading: const CircleAvatar(
-                  child: Text(
-                    'B',
-                  ),
-                ),
-                title: const Text(
-                  'Blanca Lewin',
-                ),
-                subtitle: const Text('Los héroes del norte'),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    // Agrega la lógica para seguir aquí
-                    if (kDebugMode) {
-                      print('Seguir a Blanca Lewin');
-                    }
-                  },
-                  child: const Text('Seguir'),
-                ),
-                onTap: () {
-                  if (kDebugMode) {
-                    print('Item seleccionado: Blanca Lewin');
+                    print('Item seleccionado: Item 1');
                   }
                 },
               ),
               const Divider(),
             ],
           ),
+          Column(
+            children: <Widget>[
+              ListTile(
+                leading: const CircleAvatar(
+                  backgroundImage:
+                      AssetImage('assets/kay.jpg'), // Agrega 'assets/' aquí
+                ),
+                title: const Text('Alan Kay'),
+                subtitle: const Text('Creador de la UI moderna'),
+                trailing:
+                    const Icon(Icons.more_vert), // Agrega un ícono a la derecha
+                onTap: () {
+                  if (kDebugMode) {
+                    print('Item seleccionado: Item 2');
+                  }
+                },
+              ),
+              const Divider(),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              ListTile(
+                leading: const CircleAvatar(
+                  backgroundImage: AssetImage(
+                      'assets/manovich.png'), // Agrega 'assets/' aquí
+                ),
+                title: const Text('Lev Manovich'),
+                subtitle: const Text('El lenguaje de los nuevos medios'),
+                trailing:
+                    const Icon(Icons.more_vert), // Agrega un ícono a la derecha
+                onTap: () {
+                  if (kDebugMode) {
+                    print('Item seleccionado: Item 2');
+                  }
+                },
+              ),
+              const Divider(),
+            ],
+          ),
+
+          Column(
+            children: <Widget>[
+              ListTile(
+                leading: const CircleAvatar(
+                  backgroundImage: AssetImage(
+                      'assets/sutherland.jpeg'), // Agrega 'assets/' aquí
+                ),
+                title: const Text('Ivan Sutherland'),
+                subtitle:
+                    const Text('Creador de la interfaz gráfica de usuario'),
+                trailing:
+                    const Icon(Icons.more_vert), // Agrega un ícono a la derecha
+                onTap: () {
+                  if (kDebugMode) {
+                    print('Item seleccionado: Item 3');
+                  }
+                },
+              ),
+              const Divider(),
+            ],
+          ),
+          // Repite desde column para cada elemento de la lista
+          // ...
         ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                // Agrega la lógica para el botón Home aquí
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                // Agrega la lógica para el botón Add aquí
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.video_library),
-              onPressed: () {
-                // Agrega la lógica para el botón Video aquí
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
