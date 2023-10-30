@@ -23,3 +23,6 @@ flutter:
     - assets/harold_1.jpeg
     - assets/harold_2.jpeg
     - assets/hola.JPG
+    - assets/whats.png
+  
+slpashscreen: ^1.3.0
