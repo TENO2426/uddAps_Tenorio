@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="tenorio_maturana_certamen2_parte2"
+        android:label="Spotify"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

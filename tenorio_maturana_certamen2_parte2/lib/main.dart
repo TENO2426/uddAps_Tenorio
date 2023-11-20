@@ -84,7 +84,7 @@ class _HomeAppState extends State<HomeApp> {
                       ),
                     ),
                     const SizedBox(
-                      width: 24.0,
+                      width: 24,
                     ),
                     Chip(
                       label: Text(
@@ -597,6 +597,8 @@ class _HomeAppState extends State<HomeApp> {
             label: _screenTitles[index],
           ),
         ),
+        selectedIconTheme: IconThemeData(color: Color.fromARGB(255, 30, 215, 96)), // Color de icono seleccionado
+        unselectedIconTheme: IconThemeData(color: Colors.grey), // Color de icono no seleccionado
       ),
     );
   }
