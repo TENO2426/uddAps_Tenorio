@@ -114,39 +114,3 @@ Widget novedadesItem() {
   );
 }
 
-Widget llamadasItem(BuildContext context, String title) {
-  const time = '15 de octubre, 12:30';
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => buildDetailScreen(
-            context,
-            DetailScreenData(title, 'Descripción de $title'),
-          ),
-        ),
-      );
-    },
-    child: ListTile(
-      leading: const CircleAvatar(
-        // backgroundColor: MyTheme.lightTheme().colorScheme.onPrimaryContainer,
-        backgroundImage: AssetImage('assets/1.jpg'), // Carga la imagen '1.jpg' en el CircleAvatar
-      ),
-      title: Text(title),
-      subtitle: Row(
-        children: [
-          Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.identity()..scale(-1.0, -1.0, 1.0),
-            child: const Icon(Icons.arrow_outward, size: 16),
-          ),
-          const SizedBox(width: 4),
-          const Text(time, style: TextStyle(fontSize: 12)),
-        ],
-      ),
-      trailing: const Icon(Icons.call),
-    ),
-  );
-}
-

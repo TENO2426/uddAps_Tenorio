@@ -72,18 +72,20 @@ class _HomeAppState extends State<HomeApp> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 16.0),
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 20.0,
-                        backgroundColor: Colors.green,
-                        child: Text(
+                        backgroundColor: MyTheme.lightTheme()
+                            .colorScheme
+                            .primary, // Cambia a color primario
+                        child: const Text(
                           'F',
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ),
                     ),
                     const SizedBox(
-                        width:
-                            24.0), // Aumenta el espacio entre el CircleAvatar y los chips
+                      width: 24.0,
+                    ),
                     Chip(
                       label: Text(
                         'Todas',
@@ -94,7 +96,8 @@ class _HomeAppState extends State<HomeApp> {
                       backgroundColor: MyTheme.lightTheme().colorScheme.primary,
                     ),
                     const SizedBox(
-                        width: 8.0), // Agrega un espacio entre los chips
+                      width: 8.0,
+                    ),
                     Chip(
                       label: Text(
                         'Música',
@@ -108,10 +111,11 @@ class _HomeAppState extends State<HomeApp> {
                           MyTheme.lightTheme().colorScheme.secondaryContainer,
                     ),
                     const SizedBox(
-                        width: 8.0), // Agrega un espacio entre los chips
+                      width: 8.0,
+                    ),
                     Chip(
                       label: Text(
-                        'Música',
+                        'Podcasts',
                         style: TextStyle(
                           color: MyTheme.lightTheme()
                               .colorScheme
@@ -132,33 +136,39 @@ class _HomeAppState extends State<HomeApp> {
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Container(
-                          color: MyTheme.lightTheme()
-                              .colorScheme
-                              .secondaryContainer,
-                          padding: const EdgeInsets.all(10.0),
-                          margin: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'assets/${index + 1}.jpeg',
-                                width: 48.0,
-                                height: 48.0,
-                                fit: BoxFit.cover,
-                              ),
-                              const SizedBox(width: 16.0),
-                              Text(
-                                'Playlist $index',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: MyTheme.lightTheme()
-                                      .colorScheme
-                                      .secondary,
+                      return InkWell(
+                        onTap: () {
+                          // Lógica para la navegación
+                          _navigateToPage(1);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            color: MyTheme.lightTheme()
+                                .colorScheme
+                                .secondaryContainer,
+                            padding: const EdgeInsets.all(10.0),
+                            margin: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/${index + 1}.jpeg',
+                                  width: 48.0,
+                                  height: 48.0,
+                                  fit: BoxFit.cover,
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 16.0),
+                                Text(
+                                  'Playlist $index',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: MyTheme.lightTheme()
+                                        .colorScheme
+                                        .secondary,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -338,7 +348,7 @@ class _HomeAppState extends State<HomeApp> {
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   onPressed: () {
-                    // Lógica cuando se presiona el botón de retroceso
+                    _navigateToPage(0);
                     print('Botón de retroceso presionado!');
                   },
                 ),
@@ -369,10 +379,30 @@ class _HomeAppState extends State<HomeApp> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    novedadesItem(),
-                    novedadesItem(),
-                    novedadesItem(),
-                    novedadesItem(),
+                    GestureDetector(
+                      onTap: () {
+                        _navigateToPage(2);
+                      },
+                      child: novedadesItem(),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _navigateToPage(2);
+                      },
+                      child: novedadesItem(),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _navigateToPage(2);
+                      },
+                      child: novedadesItem(),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _navigateToPage(2);
+                      },
+                      child: novedadesItem(),
+                    ),
                     novedadesItem(),
                     novedadesItem(),
                     novedadesItem(),
@@ -399,7 +429,7 @@ class _HomeAppState extends State<HomeApp> {
                 leading: IconButton(
                   icon: const Icon(Icons.expand_more, color: Colors.white),
                   onPressed: () {
-                    // Lógica cuando se presiona el botón de retroceso
+                    _navigateToPage(1);
                     print('Botón de minimizado presionado!');
                   },
                 ),
@@ -452,7 +482,9 @@ class _HomeAppState extends State<HomeApp> {
                               left:
                                   16.0), // Ajusta el valor según sea necesario
                           child: IconButton(
-                            icon: Icon(Icons.check_circle,color:MyTheme.lightTheme().colorScheme.primary),
+                            icon: Icon(Icons.check_circle,
+                                color:
+                                    MyTheme.lightTheme().colorScheme.primary),
                             onPressed: () {
                               // Tu lógica al presionar el botón de reproducción
                             },
@@ -555,7 +587,9 @@ class _HomeAppState extends State<HomeApp> {
         currentIndex: _currentPage,
         onTap: _navigateToPage,
         type: BottomNavigationBarType.fixed,
-        unselectedItemColor: MyTheme.lightTheme().colorScheme.tertiaryContainer,
+        unselectedItemColor: MyTheme.lightTheme()
+            .colorScheme
+            .secondary, // Cambia esto al color que desees
         items: List.generate(
           _screenTitles.length,
           (index) => BottomNavigationBarItem(
